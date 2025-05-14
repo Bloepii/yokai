@@ -21,7 +21,8 @@ namespace Yokai
     private:
         const std::size_t width;
         const std::size_t height;
-        std::vector<TerrainType> map;
+        std::vector<TerrainType> terrain;
+        std::vector<float> elevation;
         const unsigned int seed;
 
         static unsigned int generate_random_seed()
@@ -34,11 +35,13 @@ namespace Yokai
 
     public:
         World(const std::size_t w, const std::size_t h, const unsigned int s = generate_random_seed())
-            : width{w}, height{h}, map(w * h, TerrainType::WATER), seed{s} {}
+            : width{w}, height{h}, terrain(w * h, TerrainType::WATER), elevation(w * h, 0), seed{s} {}
 
         [[nodiscard]] unsigned int get_seed() const noexcept;
 
-        [[nodiscard]] std::span<TerrainType> get_map() noexcept;
+        [[nodiscard]] std::span<TerrainType> get_terrain() noexcept;
+
+        [[nodiscard]] std::span<float> get_elevation() noexcept;
 
         [[nodiscard]] std::size_t get_width() const noexcept;
 

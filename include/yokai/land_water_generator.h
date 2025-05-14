@@ -14,9 +14,10 @@ namespace Yokai
         const FastNoise::SmartNode<FastNoise::Simplex> fnSimplex = FastNoise::New<FastNoise::Simplex>();
         const FastNoise::SmartNode<FastNoise::FractalFBm> fnFractal = FastNoise::New<FastNoise::FractalFBm>();
         const float frequency;
+        const float cutoff;
 
     public:
-        LandWaterGenerator(float freq = 0.1f, uint8_t octaves = 4, float lacunarity = 2.0f);
+        LandWaterGenerator(const float freq = 0.01f, const uint8_t octaves = 4, const float gain = 0.5f, const float lacunarity = 2.0f, const float cutoff = -0.1f);
 
         void generate(const std::shared_ptr<World> &world) const noexcept override;
     };

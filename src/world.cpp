@@ -28,9 +28,14 @@ namespace Yokai
         return seed;
     }
 
-    std::span<TerrainType> World::get_map() noexcept
+    std::span<TerrainType> World::get_terrain() noexcept
     {
-        return std::span<TerrainType>{map};
+        return std::span<TerrainType>{terrain};
+    }
+
+    std::span<float> World::get_elevation() noexcept
+    {
+        return std::span<float>(elevation);
     }
 
     std::size_t World::get_width() const noexcept
@@ -49,8 +54,9 @@ namespace Yokai
         {
             for (std::size_t x = 0; x < width; ++x)
             {
-                const TerrainType val = map[y * width + x];
-                out << (val == TerrainType::LAND ? 'L' : 'W');
+                const TerrainType t = terrain[y * width + x];
+                const float e = elevation[y * width + x];
+                out << to_color_kanji(t, e);
             }
             out << '\n';
         }
