@@ -34,7 +34,7 @@ namespace Yokai
                 }
                 else if (value < cutoff + 0.1f) // Beach threshold
                 {
-                    terrain[y * w + x] = TerrainType::BEACH;
+                    terrain[y * w + x] = TerrainType::SAND;
                 }
                 else if (value < cutoff + 0.4f) // Land threshold
                 {

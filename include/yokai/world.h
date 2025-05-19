@@ -47,7 +47,7 @@ namespace Yokai
 
         void generate(const std::span<std::shared_ptr<WorldGenerator>> &generators) noexcept;
 
-        void display(std::ostream &out) const;
+        void display(std::ostream &out, bool truecolor) const;
     };
 
 }

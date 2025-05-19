@@ -37,14 +37,14 @@ namespace Yokai
         return height;
     }
 
-    void World::display(std::ostream &out) const
+    void World::display(std::ostream &out, bool truecolor) const
     {
         for (std::size_t y = 0; y < height; ++y)
         {
             for (std::size_t x = 0; x < width; ++x)
             {
                 const TerrainType t = terrain[y * width + x];
-                const float e = elevation[y * width + x];
+                const float e = truecolor ? 1 : elevation[y * width + x];
                 out << to_color_kanji(t, e);
             }
             out << '\n';

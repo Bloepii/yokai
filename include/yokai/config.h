@@ -16,6 +16,7 @@ namespace Yokai
         double lacunarity = 2.0;                                                         // Default lacunarity
         int octaves = 8;                                                                 // Default octaves
         double waterlevel = -0.05;                                                       // Default water level
+        bool truecolor = false;                                                          // Default true color
 
         Config(int argc, const char *argv[]);
     };

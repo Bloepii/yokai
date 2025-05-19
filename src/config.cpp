@@ -32,6 +32,7 @@ namespace Yokai
                           << "  -l <lacunarity>  Set the lacunarity (double)\n"
                           << "  -o <octaves>     Set the octaves (integer)\n"
                           << "  -a <waterlevel>  Set the water level (double)\n"
+                          << "  -t <truecolor>   Set true color (boolean)\n"
                           << "  --help           Display this help message\n";
                 std::exit(0);
             }
@@ -50,7 +51,8 @@ namespace Yokai
                      parseArgument(arg, "-o", octaves, [](const char *val)
                                    { return std::stoi(val); }) ||
                      parseArgument(arg, "-a", waterlevel, [](const char *val)
-                                   { return std::stod(val); }))
+                                   { return std::stod(val); }) ||
+                     (arg == "-t" ? (truecolor = true, true) : false))
             {
                 continue;
             }
