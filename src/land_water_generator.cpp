@@ -1,17 +1,6 @@
-#include <vector>
-#include <memory>
-#include <cstddef>
-#include <cstdint>
-#include <span>
-#include <iostream>
-#include <fstream>
-#include <random>
-#include <limits>
-#include <chrono>
+#include "yokai/land_water_generator.h"
 
-#include "../include/yokai/land_water_generator.h"
-
-#include "../include/yokai/terrain.h"
+#include "yokai/terrain.h"
 
 namespace Yokai
 {

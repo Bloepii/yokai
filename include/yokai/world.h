@@ -2,12 +2,10 @@
 #define YOKAI_WORLD_H
 
 #include <vector>
-#include <string>
 #include <span>
 #include <ostream>
 #include <random>
 #include <limits>
-#include <chrono>
 
 #include "terrain.h"
 #include "world_generator.h"
@@ -47,7 +45,7 @@ namespace Yokai
 
         [[nodiscard]] std::size_t get_height() const noexcept;
 
-        void generate(const std::vector<std::unique_ptr<const WorldGenerator>> &generators) noexcept;
+        void generate(const std::span<std::shared_ptr<WorldGenerator>> &generators) noexcept;
 
         void display(std::ostream &out) const;
     };

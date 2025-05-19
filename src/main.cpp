@@ -1,4 +1,4 @@
-#include <vector>
+#include <array>
 #include <memory>
 #include <cstddef>
 #include <cstdint>
@@ -9,17 +9,17 @@
 #include <limits>
 #include <chrono>
 
-#include "../include/yokai/world.h"
-#include "../include/yokai/world_generator.h"
-#include "../include/yokai/land_water_generator.h"
-#include "../include/yokai/config.h"
+#include "yokai/world.h"
+#include "yokai/world_generator.h"
+#include "yokai/land_water_generator.h"
+#include "yokai/config.h"
 
 using namespace Yokai;
 int main(const int argc, const char *argv[]) noexcept
 {
     Config c{argc, argv};
-    std::vector<std::unique_ptr<const WorldGenerator>> generators{};
-    generators.emplace_back(std::make_unique<const LandWaterGenerator>(c.frequency, c.octaves, c.gain, c.lacunarity, c.waterlevel));
+    std::array<std::shared_ptr<WorldGenerator>, 1> generators{
+        std::make_shared<LandWaterGenerator>(c.frequency, c.octaves, c.gain, c.lacunarity, c.waterlevel)};
     const auto world = std::make_shared<World>(c.width, c.height, c.seed);
     world->generate(generators);
 

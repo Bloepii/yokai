@@ -1,8 +1,6 @@
 #ifndef YOKAI_TERRAIN_H
 #define YOKAI_TERRAIN_H
 
-#include <cstdint>
-#include <string_view>
 #include <string>
 
 namespace Yokai

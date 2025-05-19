@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "../FastNoise/FastNoise.h"
-#include "world_generator.h"
+#include "FastNoise/FastNoise.h"
+#include "yokai/world_generator.h"
 
 namespace Yokai
 {

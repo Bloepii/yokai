@@ -1,4 +1,6 @@
-#include "../include/yokai/config.h"
+#include <iostream>
+
+#include "yokai/config.h"
 
 namespace Yokai
 {

@@ -1,21 +1,10 @@
-#include <vector>
-#include <memory>
-#include <cstddef>
-#include <cstdint>
-#include <span>
-#include <iostream>
-#include <fstream>
-#include <random>
-#include <limits>
-#include <chrono>
+#include "yokai/world.h"
 
-#include "../include/yokai/world.h"
-
-#include "../include/FastNoise/FastNoise.h"
+#include "FastNoise/FastNoise.h"
 
 namespace Yokai
 {
-    void World::generate(const std::vector<std::unique_ptr<const WorldGenerator>> &generators) noexcept
+    void World::generate(const std::span<std::shared_ptr<WorldGenerator>> &generators) noexcept
     {
         for (const auto &gen : generators)
         {
