@@ -1,5 +1,8 @@
 #include <iostream>
 
+#include <sys/ioctl.h>
+#include <unistd.h>
+
 #include "yokai/config.h"
 
 namespace Yokai
@@ -7,6 +10,12 @@ namespace Yokai
 
     Config::Config(int argc, const char *argv[])
     {
+        struct winsize w;
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+        width = (w.ws_col / 2);
+        height = w.ws_row;
+
         for (int i = 1; i < argc; ++i)
         {
             auto parseArgument = [&](const std::string &arg, const std::string &flag, auto &value, auto converter)
