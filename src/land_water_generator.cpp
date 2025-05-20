@@ -13,15 +13,15 @@ namespace Yokai
         fnFractal->SetGain(gain);
     }
 
-    void LandWaterGenerator::generate(const std::shared_ptr<World> &world) const noexcept
+    void LandWaterGenerator::generate(World& world) const
     {
-        const uint8_t w = world->get_width();
-        const uint8_t h = world->get_height();
-        const auto terrain = world->get_terrain();
-        const auto elevation = world->get_elevation();
+        const std::size_t w = world.get_width();
+        const std::size_t h = world.get_height();
+        const auto terrain = world.get_terrain();
+        const auto elevation = world.get_elevation();
 
         std::vector<float> noiseOutput(w * h);
-        fnFractal->GenUniformGrid2D(noiseOutput.data(), 0, 0, w, h, frequency, world->get_seed());
+        fnFractal->GenUniformGrid2D(noiseOutput.data(), 0, 0, w, h, frequency, world.get_seed());
         for (std::size_t y = 0; y < h; ++y)
         {
             for (std::size_t x = 0; x < w; ++x)

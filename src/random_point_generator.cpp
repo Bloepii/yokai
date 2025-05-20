@@ -2,10 +2,10 @@
 
 namespace Yokai
 {
-    void RandomPointGenerator::generate(const std::shared_ptr<World> &world) const noexcept
+    void RandomPointGenerator::generate(World& world) const
     {
-        const auto w = world->get_width();
-        const auto h = world->get_height();
+        const auto w = world.get_width();
+        const auto h = world.get_height();
         // if frequency is 0.01, then 1% of the points will be generated
         const auto num_points = static_cast<std::size_t>(w * h * frequency);
         // distribution for a random point
@@ -17,10 +17,10 @@ namespace Yokai
             // Generate a random point
             const auto random_index = random_point(generator);
             // Check if the terrain type is in the allowed locations
-            if (std::find(locations.begin(), locations.end(), world->get_terrain()[random_index]) != locations.end())
+            if (std::find(locations.begin(), locations.end(), world.get_terrain()[random_index]) != locations.end())
             {
                 // If it is, set the terrain type to the point type
-                world->get_terrain()[random_index] = point;
+                world.get_terrain()[random_index] = point;
             }
         }
     }

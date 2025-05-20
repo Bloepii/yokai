@@ -46,21 +46,21 @@ namespace Yokai
                 std::exit(0);
             }
             else if (parseArgument(arg, "-w", width, [](const char *val)
-                                   { return std::stoi(val); }) ||
+                                   { return std::stoull(val); }) ||
                      parseArgument(arg, "-h", height, [](const char *val)
-                                   { return std::stoi(val); }) ||
+                                   { return std::stoull(val); }) ||
                      parseArgument(arg, "-s", seed, [](const char *val)
                                    { return static_cast<unsigned int>(std::stoul(val)); }) ||
                      parseArgument(arg, "-f", frequency, [](const char *val)
-                                   { return std::stod(val); }) ||
+                                   { return std::stof(val); }) ||
                      parseArgument(arg, "-g", gain, [](const char *val)
-                                   { return std::stod(val); }) ||
+                                   { return std::stof(val); }) ||
                      parseArgument(arg, "-l", lacunarity, [](const char *val)
-                                   { return std::stod(val); }) ||
+                                   { return std::stof(val); }) ||
                      parseArgument(arg, "-o", octaves, [](const char *val)
                                    { return std::stoi(val); }) ||
                      parseArgument(arg, "-a", waterlevel, [](const char *val)
-                                   { return std::stod(val); }) ||
+                                   { return std::stof(val); }) ||
                      (arg == "-t" ? (truecolor = true, true) : false))
             {
                 continue;

@@ -19,7 +19,7 @@ namespace Yokai
     public:
         LandWaterGenerator(const float freq = 0.01f, const uint8_t octaves = 4, const float gain = 0.5f, const float lacunarity = 2.0f, const float cutoff = -0.1f);
 
-        void generate(const std::shared_ptr<World> &world) const noexcept override;
+        void generate(World& world) const override;
     };
 }
 

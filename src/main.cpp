@@ -16,7 +16,7 @@
 #include "yokai/random_point_generator.h"
 
 using namespace Yokai;
-int main(const int argc, const char *argv[]) noexcept
+int main(const int argc, const char *argv[])
 {
     Config c{argc, argv};
     // Use pointers to base class for polymorphism
@@ -46,14 +46,14 @@ int main(const int argc, const char *argv[]) noexcept
     generators.emplace_back(crabs);
     generators.emplace_back(octopuses);
 
-    const auto world = std::make_shared<World>(c.width, c.height, c.seed);
-    world->generate(std::span<std::shared_ptr<WorldGenerator>>{generators});
+    World world { c.width, c.height, c.seed };
+    world.generate(std::span<std::shared_ptr<WorldGenerator>>{generators});
 
     {
         std::ofstream file("world.txt", std::ios::trunc);
         if (file)
-            world->display(file, c.truecolor);
+            world.display(file, c.truecolor);
     }
 
-    world->display(std::cout, c.truecolor);
+    world.display(std::cout, c.truecolor);
 }

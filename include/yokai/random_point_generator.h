@@ -27,7 +27,7 @@ namespace Yokai
     public:
         RandomPointGenerator(std::vector<TerrainType> locs, double freq, TerrainType pt)
             : locations(locs), frequency(freq), point(pt) {}
-        void generate(const std::shared_ptr<World> &world) const noexcept override;
+        void generate(World& world) const override;
     };
 }
 

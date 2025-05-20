@@ -11,7 +11,7 @@ namespace Yokai
 
     struct [[nodiscard]] WorldGenerator
     {
-        virtual void generate(const std::shared_ptr<World> &world) const noexcept = 0;
+        virtual void generate(World& world) const = 0;
         virtual ~WorldGenerator() = default;
     };
 

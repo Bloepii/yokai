@@ -4,35 +4,35 @@
 
 namespace Yokai
 {
-    void World::generate(const std::span<std::shared_ptr<WorldGenerator>> &generators) noexcept
+    void World::generate(const std::span<std::shared_ptr<WorldGenerator>> &generators)
     {
         for (const auto &gen : generators)
         {
-            gen->generate(shared_from_this());
+            gen->generate(*this);
         }
     }
 
-    unsigned int World::get_seed() const noexcept
+    uint32_t World::get_seed() const
     {
         return seed;
     }
 
-    std::span<TerrainType> World::get_terrain() noexcept
+    std::span<TerrainType> World::get_terrain()
     {
         return std::span<TerrainType>{terrain};
     }
 
-    std::span<float> World::get_elevation() noexcept
+    std::span<float> World::get_elevation()
     {
         return std::span<float>(elevation);
     }
 
-    std::size_t World::get_width() const noexcept
+    std::size_t World::get_width() const
     {
         return width;
     }
 
-    std::size_t World::get_height() const noexcept
+    std::size_t World::get_height() const
     {
         return height;
     }
