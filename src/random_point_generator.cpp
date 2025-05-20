@@ -9,7 +9,7 @@ namespace Yokai
         // if frequency is 0.01, then 1% of the points will be generated
         const auto num_points = static_cast<std::size_t>(w * h * frequency);
         // distribution for a random point
-        std::mt19937 generator(std::random_device{}());
+        std::mt19937 generator(world.get_seed());
         std::uniform_int_distribution<std::size_t> random_point(0, w * h - 1);
 
         for (std::size_t i = 0; i < num_points; ++i)
