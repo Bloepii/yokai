@@ -4,7 +4,7 @@
 
 namespace Yokai
 {
-    void World::generate(const std::span<std::shared_ptr<WorldGenerator>> &generators)
+    void World::generate(std::span<std::unique_ptr<WorldGenerator>> generators)
     {
         for (const auto &gen : generators)
         {

@@ -2,11 +2,12 @@
 #define YOKAI_TERRAIN_H
 
 #include <string>
+#include <format>
 
 namespace Yokai
 {
 
-    enum class [[nodiscard]] TerrainType : uint8_t
+    enum class TerrainType : uint8_t
     {
         WATER,
         LAND,
@@ -69,7 +70,7 @@ namespace Yokai
         }
     }
 
-    constexpr std::string to_kanji(const TerrainType terrain) noexcept
+    constexpr std::string_view to_kanji(const TerrainType terrain) noexcept
     {
         switch (terrain)
         {
@@ -115,8 +116,12 @@ namespace Yokai
         const uint8_t r = static_cast<uint8_t>(base_color.r * brightness);
         const uint8_t g = static_cast<uint8_t>(base_color.g * brightness);
         const uint8_t b = static_cast<uint8_t>(base_color.b * brightness);
-        const std::string kanji = to_kanji(terrain);
-        return "\033[38:2::" + std::to_string(r) + ":" + std::to_string(g) + ":" + std::to_string(b) + "m" + kanji + "\033[39m";
+
+        return std::format(
+            "\033[38:2::{}:{}:{}m{}\033[39m",
+            r, g, b,
+            to_kanji(terrain)
+        );
     }
 }
 

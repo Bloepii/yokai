@@ -37,7 +37,7 @@ namespace Yokai
 
         [[nodiscard]] std::size_t get_height() const;
 
-        void generate(const std::span<std::shared_ptr<WorldGenerator>> &generators);
+        void generate(std::span<std::unique_ptr<WorldGenerator>> generators);
 
         void display(std::ostream &out, bool truecolor) const;
     };
