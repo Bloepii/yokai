@@ -22,6 +22,16 @@ namespace Yokai
         return std::span<TerrainType>{terrain};
     }
 
+    TerrainType World::get_tile(std::size_t idx) const
+    {
+        return terrain[idx];
+    }
+
+    void World::set_tile(std::size_t idx, TerrainType type)
+    {
+        terrain[idx] = type;
+    }
+
     std::span<float> World::get_elevation()
     {
         return std::span<float>(elevation);
@@ -35,6 +45,10 @@ namespace Yokai
     std::size_t World::get_height() const
     {
         return height;
+    }
+
+    std::uniform_int_distribution<std::size_t> World::world_distribution() const {
+        return std::uniform_int_distribution<std::size_t> { 0, terrain.size() - 1 };
     }
 
     void World::display(std::ostream &out, bool truecolor) const

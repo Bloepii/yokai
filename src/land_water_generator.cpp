@@ -15,43 +15,46 @@ namespace Yokai
 
     void LandWaterGenerator::generate(World& world) const
     {
-        const std::size_t w = world.get_width();
-        const std::size_t h = world.get_height();
         const auto terrain = world.get_terrain();
         const auto elevation = world.get_elevation();
 
-        std::vector<float> noiseOutput(w * h);
-        fnFractal->GenUniformGrid2D(noiseOutput.data(), 0, 0, w, h, frequency, world.get_seed());
-        for (std::size_t y = 0; y < h; ++y)
-        {
-            for (std::size_t x = 0; x < w; ++x)
+        std::vector<float> noiseOutput(terrain.size());
+        fnFractal->GenUniformGrid2D(
+            noiseOutput.data(),
+            0, 0, world.get_width(), world.get_height(),
+            frequency,
+            world.get_seed()
+        );
+
+        auto noise_it = noiseOutput.begin();
+        auto terrain_it = terrain.begin();
+        auto elevation_it = elevation.begin();
+        for (; noise_it != noiseOutput.end(); ++noise_it, ++terrain_it, ++elevation_it) {
+
+            const float value = *noise_it;
+
+            if (value < cutoff)
             {
-                const float value = noiseOutput[y * w + x];
-
-                if (value < cutoff)
-                {
-                    terrain[y * w + x] = TerrainType::WATER;
-                }
-                else if (value < cutoff + 0.1f) // Beach threshold
-                {
-                    terrain[y * w + x] = TerrainType::SAND;
-                }
-                else if (value < cutoff + 0.4f) // Land threshold
-                {
-                    terrain[y * w + x] = TerrainType::LAND;
-                }
-                else if (value < cutoff + 0.6f) // Mountain threshold
-                {
-                    terrain[y * w + x] = TerrainType::MOUNTAIN;
-                }
-                else // Snow mountain threshold
-                {
-                    terrain[y * w + x] = TerrainType::SNOW;
-                }
-
-                // Scale elevation to 0-1 (from -0.5 to 0.5)
-                elevation[y * w + x] = (value + 0.5f) / 1.0f;
+                *terrain_it = TerrainType::WATER;
             }
+            else if (value < cutoff + 0.1f) // Beach threshold
+            {
+                *terrain_it = TerrainType::SAND;
+            }
+            else if (value < cutoff + 0.4f) // Land threshold
+            {
+                *terrain_it = TerrainType::LAND;
+            }
+            else if (value < cutoff + 0.6f) // Mountain threshold
+            {
+                *terrain_it = TerrainType::MOUNTAIN;
+            }
+            else // Snow mountain threshold
+            {
+                *terrain_it = TerrainType::SNOW;
+            }
+
+            *elevation_it = (value + 0.5f) / 1.0f;
         }
     }
 }

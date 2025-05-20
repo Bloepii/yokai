@@ -30,12 +30,16 @@ namespace Yokai
         [[nodiscard]] unsigned int get_seed() const;
 
         [[nodiscard]] std::span<TerrainType> get_terrain();
+        [[nodiscard]] TerrainType get_tile(std::size_t idx) const;
+        void set_tile(std::size_t idx, TerrainType type);
 
         [[nodiscard]] std::span<float> get_elevation();
 
         [[nodiscard]] std::size_t get_width() const;
 
         [[nodiscard]] std::size_t get_height() const;
+
+        [[nodiscard]] std::uniform_int_distribution<std::size_t> world_distribution() const;
 
         void generate(std::span<std::unique_ptr<WorldGenerator>> generators);
 
