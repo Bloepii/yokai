@@ -22,12 +22,16 @@ namespace Yokai
         std::vector<TerrainType> terrain;
         std::vector<float> elevation;
         const uint32_t seed;
+        std::shared_ptr<std::mt19937> generator;
+        std::uniform_int_distribution<std::size_t> distribution;
 
     public:
         World(std::size_t w, std::size_t h, const uint32_t s = std::random_device{}())
-            : width{w}, height{h}, terrain(w * h, TerrainType::WATER), elevation(w * h, 0), seed{s} {}
+            : width{w}, height{h}, terrain(w * h, TerrainType::WATER), elevation(w * h, 0), seed{s}, generator{std::make_shared<std::mt19937>(s)}, distribution{0, w * h} {}
 
         [[nodiscard]] unsigned int get_seed() const;
+
+        [[nodiscard]] std::shared_ptr<std::mt19937> get_generator();
 
         [[nodiscard]] std::span<TerrainType> get_terrain();
         [[nodiscard]] TerrainType get_tile(std::size_t idx) const;
@@ -39,7 +43,7 @@ namespace Yokai
 
         [[nodiscard]] std::size_t get_height() const;
 
-        [[nodiscard]] std::uniform_int_distribution<std::size_t> world_distribution() const;
+        [[nodiscard]] std::uniform_int_distribution<std::size_t> &world_distribution();
 
         void generate(std::span<std::unique_ptr<WorldGenerator>> generators);
 

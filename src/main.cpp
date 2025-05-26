@@ -19,7 +19,8 @@
 using namespace Yokai;
 
 template <std::derived_from<WorldGenerator> T, typename... Args>
-std::unique_ptr<WorldGenerator> make_generator(Args&&... args) {
+std::unique_ptr<WorldGenerator> make_generator(Args &&...args)
+{
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
@@ -27,7 +28,7 @@ int main(const int argc, const char *argv[])
 {
     Config c{argc, argv};
 
-    std::array generators {
+    std::array generators{
         // Continents
         make_generator<LandWaterGenerator>(c.frequency, c.octaves, c.gain, c.lacunarity, c.waterlevel),
 
@@ -41,11 +42,10 @@ int main(const int argc, const char *argv[])
         make_generator<RandomPointGenerator>(TerrainType::WATER, 0.02, TerrainType::SEAWEED),
         make_generator<RandomPointGenerator>(TerrainType::WATER, 0.001, TerrainType::SHARK),
         make_generator<RandomPointGenerator>(TerrainType::WATER, 0.01, TerrainType::TURTLE),
-        make_generator<RandomPointGenerator>(TerrainType::WATER,  0.01, TerrainType::OCTOPUS),
+        make_generator<RandomPointGenerator>(TerrainType::WATER, 0.01, TerrainType::OCTOPUS),
     };
 
-
-    World world { c.width, c.height, c.seed };
+    World world{c.width, c.height, c.seed};
     world.generate(generators);
 
     {

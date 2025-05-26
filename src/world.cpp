@@ -17,6 +17,11 @@ namespace Yokai
         return seed;
     }
 
+    std::shared_ptr<std::mt19937> World::get_generator()
+    {
+        return generator;
+    }
+
     std::span<TerrainType> World::get_terrain()
     {
         return std::span<TerrainType>{terrain};
@@ -47,8 +52,9 @@ namespace Yokai
         return height;
     }
 
-    std::uniform_int_distribution<std::size_t> World::world_distribution() const {
-        return std::uniform_int_distribution<std::size_t> { 0, terrain.size() - 1 };
+    std::uniform_int_distribution<std::size_t> &World::world_distribution()
+    {
+        return distribution;
     }
 
     void World::display(std::ostream &out, bool truecolor) const
